@@ -43,7 +43,11 @@
 <div id="trakt" class="event">
 
                 <?php
+<<<<<<< HEAD
                     $url = "http://trakt.tv/users/rolle/history.atom?slurm=addddddb526608d7639d3b07e176f2ea";
+=======
+                    $url = "http://trakt.tv/users/rolle/history.atom?slurm=getenv('TRAKT_SLURM')";
+>>>>>>> db04907... First commit in GitHub
                     $rss = simplexml_load_file($url);
                     $image = $rss->entry->children($namespaces['media'])->thumbnail->attributes()->url;
                 ?>
