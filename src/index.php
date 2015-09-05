@@ -26,10 +26,13 @@
         <div class="esittely">
           <h1 class="center"><span><?php echo gethostbyname('www.peikko.us'); ?></span>, tuttavallisemmin <b>peikko</b>.</h1>
           <h4 class="center"><a href="http://roni.laukkarinen.info">Rollen</a> vaatekomerossa huriseva <span class="version"><?php
-          $release = shell_exec('cat /etc/redhat-release |head -1');
-          $versionongintaa = explode("Fedora release ", $release);
-          $versionongintaaa = explode("(", $versionongintaa[1]);
-          $versio = $versionongintaaa[0];
+              //ini_set('display_errors', 0); 
+              ini_set('display_errors', 1); 
+              error_reporting(E_ALL);
+              $release = shell_exec('cat /etc/redhat-release |head -1');
+              $versionongintaa = explode("Fedora release ", $release);
+              $versionongintaaa = explode("(", $versionongintaa[1]);
+              $versio = $versionongintaaa[0];
           ?>
           <span class="opacity"><a href="https://getfedora.org/en/server/" class="fedoramini"><?php echo $versio; ?></a></span></span>-palvelintietokone.</h4>
 
@@ -43,7 +46,7 @@
 <div id="trakt" class="event">
 
                 <?php
-                    $url = "http://trakt.tv/users/rolle/history.atom?slurm=getenv('TRAKT_SLURM')";
+                    $url = "http://trakt.tv/users/rolle/history.atom?slurm=".getenv('TRAKT_SLURM')."";
                     $rss = simplexml_load_file($url);
                     $image = $rss->entry->children($namespaces['media'])->thumbnail->attributes()->url;
                 ?>

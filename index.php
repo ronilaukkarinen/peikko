@@ -1,12 +1,15 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>peikko.us | Rollen kotikone</title><link rel="stylesheet" href="css/layout.css"><link rel="shortcut icon" href="images/fedora.png"><meta property="og:image" content="images/fedora.png"><meta property="og:image:type" content="image/png"><!--[if lt IE 9]>
  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
  <![endif]--></head><body><div id="wrapper"><div class="row"><div class="esittely"><h1 class="center"><span><?php echo gethostbyname('www.peikko.us'); ?></span>, tuttavallisemmin <b>peikko</b>.</h1><h4 class="center"><a href="http://roni.laukkarinen.info">Rollen</a> vaatekomerossa huriseva <span class="version"><?php
-          $release = shell_exec('cat /etc/redhat-release |head -1');
-          $versionongintaa = explode("Fedora release ", $release);
-          $versionongintaaa = explode("(", $versionongintaa[1]);
-          $versio = $versionongintaaa[0];
+              //ini_set('display_errors', 0); 
+              ini_set('display_errors', 1); 
+              error_reporting(E_ALL);
+              $release = shell_exec('cat /etc/redhat-release |head -1');
+              $versionongintaa = explode("Fedora release ", $release);
+              $versionongintaaa = explode("(", $versionongintaa[1]);
+              $versio = $versionongintaaa[0];
           ?><span class="opacity"><a href="https://getfedora.org/en/server/" class="fedoramini"><?php echo $versio; ?></a></span></span>-palvelintietokone.</h4></div><div class="tapahtumat"><div id="np" class="event"></div><div id="trakt" class="event"><?php
-                    $url = "http://trakt.tv/users/rolle/history.atom?slurm=addddddb526608d7639d3b07e176f2ea";
+                    $url = "http://trakt.tv/users/rolle/history.atom?slurm=".getenv('TRAKT_SLURM')."";
                     $rss = simplexml_load_file($url);
                     $image = $rss->entry->children($namespaces['media'])->thumbnail->attributes()->url; ?><div class="trakt"><div class="traktposter"><a href="http://trakt.tv/user/rolle" title="<?php echo $rss->entry->title; ?>"><img src="<?php echo $image; ?>" alt="<?php echo $rss->entry->title; ?>"></a></div><h2 class="item"><a href="<?php echo $rss->entry->children($namespaces['link'])->attributes()->href; ?>" title="<?php echo $rss->entry->title; ?> viimeksi katsottu serverillä"><?php  ?></a></h2><h3 class="item2"><?php echo $rss->entry->title; ?></h3><a class="nplogo" href="http://www.plexapp.com"><img src="images/plexnp.png" alt="Plex"></a></div></div><div id="irc" class="event"><blockquote><?php 
   
