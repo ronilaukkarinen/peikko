@@ -1,0 +1,20 @@
+{
+  "name": "peikko",
+  "description": "Peikko.us website",
+  "authors": [
+    {
+      "name": "Roni Laukkarinen",
+      "email": "roni@dude.fi"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "wubs/trakt": "dev-develop"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.4.*"
+  },
+  "autoload": {
+    "psr-0": {"Wubs": "src/"}
+  }
+}
