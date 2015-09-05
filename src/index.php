@@ -27,7 +27,7 @@
           <h1 class="center"><span><?php echo gethostbyname('www.peikko.us'); ?></span>, tuttavallisemmin <b>peikko</b>.</h1>
           <h4 class="center"><a href="http://roni.laukkarinen.info">Rollen</a> vaatekomerossa huriseva <span class="version"><?php
               require_once('vendor/autoload.php');
-              $dotenv = new Dotenv\Dotenv(__DIR__);
+              $dotenv = new Dotenv\Dotenv('../');
               $dotenv->load();
               ini_set('display_errors', 0); 
               $release = shell_exec('cat /etc/redhat-release |head -1');
@@ -73,7 +73,7 @@
   $find = array("#(^|[\n ])([\w]+?://[\w\#$%&~/.\-;:=,?@\[\]+]*)#is",'/\< .*\> /','/<\@.*\> /','/\<\+.*\> /','/^([\d]{1,2})\:([\d]{2})$/','/[0-9][0-9]:[0-5][0-9]/','-!-');
   $replace = array("\\1<a href=\"\\2\" target=\"_blank\">\\2</a>",'','','','','','');
 
-  $logi = shell_exec("tail -1 /home/rolle/public_html/latest-irc.log");
+  $logi = shell_exec("tail -1 /var/www/html/latest-irc.log");
   $rivi = preg_replace($find,$replace,$logi);
 
   echo strip_tags($rivi);
