@@ -67,7 +67,7 @@
 
       </div>
 
-      <h2 class="item"><a href="<?php echo $rss->entry->children($namespaces['link'])->attributes()->href; ?>" title="<?php echo $rss->entry->title; ?> viimeksi katsottu serverillä"><?php  ?></a></h2>
+      <h2 class="item"><a href="<?php echo $rss->entry->children($namespaces['link'])->attributes()->href; ?>" title="<?php echo $rss->entry->title; ?> viimeksi katsottu serverillä"><?php echo $rss->entry->title; ?></a></h2>
         
       <h3 class="item2"><?php echo $rss->entry->title; ?></h3>
 
@@ -132,7 +132,7 @@ echo $motd;
   <span class="icon-console-controls"></span>
   <div class="console-chrome">
 
-  <div class="log">
+  <div class="log sysmon">
   <b><span class="server">peikko</span><span class="mato"> ~ $</span></b> sysmon --realtime<br />
 
       <div class="row">

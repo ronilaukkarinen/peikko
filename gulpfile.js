@@ -6,22 +6,16 @@ REQUIRED STUFF
 
 var changed     = require('gulp-changed');
 var gulp        = require('gulp');
-var imagemin    = require('gulp-imagemin');
 var sass        = require('gulp-sass');
 var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
-var notify      = require('gulp-notify');
 var prefix      = require('gulp-autoprefixer');
 var minifycss   = require('gulp-minify-css');
 var uglify      = require('gulp-uglify');
-var cache       = require('gulp-cache');
 var concat      = require('gulp-concat');
 var util        = require('gulp-util');
 var header      = require('gulp-header');
-var pixrem      = require('gulp-pixrem');
-var pagespeed   = require('psi');
 var minifyhtml  = require('gulp-minify-html');
-var runSequence = require('run-sequence');
 var exec        = require('child_process').exec;
 
 
@@ -85,11 +79,9 @@ gulp.task('sass', function() {
         errLogToConsole: true
       })) 
 
-  .pipe(prefix('last 3 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4')) //adds browser prefixes (eg. -webkit, -moz, etc.)
+  .pipe(prefix('last 3 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
   .pipe(minifycss({keepBreaks:false,keepSpecialComments:0,}))
-  .pipe(pixrem())
   .pipe(gulp.dest(cssDest))
-  .pipe(browserSync.stream())
 
   });
 
@@ -142,6 +134,7 @@ gulp.task('minify-html', function() {
     }))
     .pipe(gulp.dest(markupDest))
     exec("cp index.php /Volumes/Root/var/www/html/");
+    exec("cp -R css /Volumes/Root/var/www/html/");
 
 });
 

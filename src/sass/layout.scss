@@ -4,9 +4,6 @@
 body {
 	background:#fafbfb;
 	font-family:"Oxygen";
-	* {
-		font-family:"Oxygen";
-	}
 	font-size:1.2em;
 	color:#444;
 	margin:40px 0;
@@ -103,6 +100,11 @@ a:hover {
 	color: #444;
 	background: rgb(243, 243, 243);
 	overflow:hidden;
+	font-family:"Oxygen";
+
+	&.sysmon {
+		font-family: "Monaco","Courier New",monospace;
+	}
 }
 
 .log a, .log a:link, .log a:visited {
