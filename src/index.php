@@ -48,8 +48,15 @@
 
                 <?php
                     $url = "http://trakt.tv/users/rolle/history.atom?slurm=".getenv('TRAKT_SLURM')."";
-                    $rss = simplexml_load_file($url);
-                    $image = $rss->entry->children($namespaces['media'])->thumbnail->attributes()->url;
+                    $rss = simplexml_load_file($url);                    
+                    $list = $rss->xpath("//@url");
+
+                    $preparedUrls = array();
+                    foreach($list as $item) {
+                          $item = parse_url($item);
+                          $preparedUrls[] = $item['scheme'] . '://' .  $item['host'] . '' .  $item['path'] . '';
+                    }
+                    $image = $preparedUrls[1];
                 ?>
                       
     <div class="trakt">
@@ -90,8 +97,8 @@
   <div class="console-chrome">
 
   <div class="log">
-  <b><span class="server">peikko</span><span class="mato"> ~ $</span></b> head -4 <a href="/motd.php">/etc/motd</a><br />
-  <?php $motd = nl2br(shell_exec("head -4 /etc/motd")); 
+  <b><span class="server">peikko</span><span class="mato"> ~ $</span></b> head -5 <a href="/motd.php">/etc/motd</a><br />
+  <?php $motd = nl2br(shell_exec("head -5 /etc/motd")); 
 
 $m = '|([\w\d]*)\s?(https?://([\d\w\.-]+\.[\w\.]{2,6})[^\s\]\[\<\>]*/?)|i';
 $r = '$1 <a href="$2">$2</a>';
