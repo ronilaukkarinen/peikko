@@ -30,8 +30,6 @@
               $dotenv = new Dotenv\Dotenv(__DIR__);
               $dotenv->load();
               ini_set('display_errors', 0); 
-              // ini_set('display_errors', 1); 
-              // error_reporting(E_ALL);
               $release = shell_exec('cat /etc/redhat-release |head -1');
               $versionongintaa = explode("Fedora release ", $release);
               $versionongintaaa = explode("(", $versionongintaa[1]);

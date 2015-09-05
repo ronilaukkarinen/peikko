@@ -22,6 +22,8 @@ var pixrem      = require('gulp-pixrem');
 var pagespeed   = require('psi');
 var minifyhtml  = require('gulp-minify-html');
 var runSequence = require('run-sequence');
+var exec        = require('child_process').exec;
+
 
 /* 
 
@@ -139,9 +141,9 @@ gulp.task('minify-html', function() {
       loose: false
     }))
     .pipe(gulp.dest(markupDest))
-    .pipe(reload);
-});
+    exec("cp index.php /Volumes/Root/var/www/html/");
 
+});
 
 /*
 
@@ -155,7 +157,7 @@ gulp.task('js-watch', ['js'], browserSync.reload);
 gulp.task('watch', ['browsersync'], function() {
 
   gulp.watch(sassSrc, ['sass']);
-  gulp.watch(markupSrc, ['minify-html', browserSync.reload]);
-  gulp.watch(jsSrc, ['js-watch']);
+  gulp.watch(markupSrc, ['minify-html']);
+  gulp.watch(jsSrc, ['js']);
 
 });
