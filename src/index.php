@@ -26,9 +26,12 @@
         <div class="esittely">
           <h1 class="center"><span><?php echo gethostbyname('www.peikko.us'); ?></span>, tuttavallisemmin <b>peikko</b>.</h1>
           <h4 class="center"><a href="http://roni.laukkarinen.info">Rollen</a> vaatekomerossa huriseva <span class="version"><?php
-              //ini_set('display_errors', 0); 
-              ini_set('display_errors', 1); 
-              error_reporting(E_ALL);
+              require_once('vendor/autoload.php');
+              $dotenv = new Dotenv\Dotenv(__DIR__);
+              $dotenv->load();
+              ini_set('display_errors', 0); 
+              // ini_set('display_errors', 1); 
+              // error_reporting(E_ALL);
               $release = shell_exec('cat /etc/redhat-release |head -1');
               $versionongintaa = explode("Fedora release ", $release);
               $versionongintaaa = explode("(", $versionongintaa[1]);
