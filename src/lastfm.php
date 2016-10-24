@@ -2,11 +2,7 @@
   <ul>
 <?php
 $lastfmUsername = "rolle-";
-if (is_dir('/Users/rolle')) {
-$lastfmCache = '/Users/rolle/Projects/peikko/lastfm.recent.cache';
-} else {
 $lastfmCache = "lastfm.recent.cache";
-}
 $secondsBeforeUpdate = 180; // be nice to their link
 $numberOfSongs = 1; // 10 is max
 $socketTimeout = 3; // seconds to wait for response from audioscrobbler
@@ -93,7 +89,7 @@ else {
 
           $artist_image_filename = basename( $img );
 
-          if ( getenv('ENV') === 'development' ) :
+          if ( getenv('ENV') == 'development' ) :
             $paikallinen_artistikuva = '/var/www/peikko/images/' . $artist_image_filename;
           else :
             $paikallinen_artistikuva = '/var/www/peikko/html/images/artist-image-db/' . $artist_image_filename;
