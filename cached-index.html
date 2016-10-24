@@ -1,13 +1,3 @@
-<?php
-$cachefile = 'cached-index.html';
-$cachetime = 1800;
-if (file_exists($cachefile) && time() - $cachetime < filemtime($cachefile)) {
-    include($cachefile);
-    echo "<!-- Amazing hand crafted super cache, generated ".date('H:i', filemtime($cachefile))." -->";
-    exit;
-}
-ob_start();
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,41 +20,62 @@ ob_start();
       <div class="row">
 
         <div class="esittely">
-          <h1 class="center"><span><?php echo gethostbyname('www.peikko.us'); ?></span>, tuttavallisemmin <b>peikko</b>.</h1>
-          <h4 class="center"><a href="https://roni.laukkarinen.info">Rollen</a> vaatekomerossa huriseva <span class="version"><?php
-              require_once('vendor/autoload.php');
-              $dotenv = new Dotenv\Dotenv('./');
-              $dotenv->load();
-              ini_set('display_errors', 0);
-              $release = shell_exec('cat /etc/redhat-release |head -1');
-              $versionongintaa = explode("Fedora release ", $release);
-              $versionongintaaa = explode("(", $versionongintaa[1]);
-              $versio = $versionongintaaa[0];
-          ?>
-          <span class="opacity"><a href="https://getfedora.org/en/server/" class="fedoramini"><?php echo $versio; ?></a></span></span>-palvelintietokone.</h4>
+          <h1 class="center"><span>88.195.179.177</span>, tuttavallisemmin <b>peikko</b>.</h1>
+          <h4 class="center"><a href="https://roni.laukkarinen.info">Rollen</a> vaatekomerossa huriseva <span class="version">          <span class="opacity"><a href="https://getfedora.org/en/server/" class="fedoramini"></a></span></span>-palvelintietokone.</h4>
 
         </div>
 
 <div class="tapahtumat">
 
   <div id="np" class="event">
-    <?php include('src/lastfm.php'); ?>
+    <div class="lastFMBody recenttracks">
+  <ul>
+
+    <li class="itemRow odd">
+
+    
+      
+      
+      
+          <div class="albumwrap">
+            <a href="https://www.last.fm/music/Anaal Nathrakh" title="Viimeksi kuunneltu: We Will Fucking Kill You">
+              <img src="images/e3f64da4441f913ca6663325ea21d1db.png" alt="Anaal Nathrakh" class="album" />
+            </a>
+          </div>
+
+        
+      
+  <h2 class="item">
+    <a href="https://www.last.fm/music/Anaal Nathrakh" title="Kuunneltu viimeksi: Anaal Nathrakh - We Will Fucking Kill You ">Anaal Nathrakh</a>
+  </h2>
+  <h3 class="item2">We Will Fucking Kill You</h3>
+  <a class="nplogo" href="http://www.last.fm/user/rolle-/">
+    <img src="images/subsonicnp.png" alt="Subsonic">
+  </a>
+
+</li>
+</ul>
+</div>
   </div>
 
   <div id="trakt" class="event">
-    <?php include('src/trakt.php'); ?>
+    
+<div class="trakt">
+<div class="traktposter">
+<a href="https://trakt.tv/user/rolle" title="The Walking Dead 7x01 "The Day Will Come When You Won't Be"">
+
+<img src="images/dec5cd226c.jpg" alt="The Walking Dead 7x01 "The Day Will Come When You Won't Be"" /></a>
+
+</div>
+
+<h2 class="item"><a href="" title="The Walking Dead 7x01 "The Day Will Come When You Won't Be" viimeksi katsottu serverillä">The Walking Dead 7x01 "The Day Will Come When You Won't Be"</a></h2>
+
+<h3 class="item2">The Walking Dead 7x01 "The Day Will Come When You Won't Be"</h3>
+
+<a class="nplogo" href="https://www.plexapp.com"><img src="images/plexnp.png" alt="Plex" /></a></div>
   </div>
 
-  <div id="irc" class="event"><blockquote><?php
-
-  $find = array("#(^|[\n ])([\w]+?://[\w\#$%&~/.\-;:=,?@\[\]+]*)#is",'/\< .*\> /','/<\@.*\> /','/\<\+.*\> /','/^([\d]{1,2})\:([\d]{2})$/','/[0-9][0-9]:[0-5][0-9]/','-!-');
-  $replace = array("\\1<a href=\"\\2\" target=\"_blank\">\\2</a>",'','','','','','');
-
-  $logi = shell_exec("tail -1 /var/www/html/latest-irc.log");
-  $rivi = preg_replace($find,$replace,$logi);
-
-  echo strip_tags($rivi);
-   ?></blockquote></div>
+  <div id="irc" class="event"><blockquote></blockquote></div>
 
    <div class="ircnote nplogo"><a href="https://www.pulina.fi">IRC</a></div>
 
@@ -109,16 +120,7 @@ ob_start();
     <div class="code">
 
         <b><span class="server">peikko</span><span class="mato"> ~ $</span></b> head -5 <a href="/motd.php">/etc/motd</a><br />
-        <?php $motd = nl2br(shell_exec("head -5 /etc/motd"));
-
-      $m = '|([\w\d]*)\s?(https?://([\d\w\.-]+\.[\w\.]{2,6})[^\s\]\[\<\>]*/?)|i';
-      $r = '$1 <a href="$2">$2</a>';
-
-      $motd = preg_replace($m,$r,$motd);
-      echo $motd;
-
-      ?>
-        <div class="cursor"></div>
+                <div class="cursor"></div>
 
     </div>
   </div>
@@ -224,8 +226,3 @@ ob_start();
 
     </body>
 </html>
-<?php
-$fp = fopen($cachefile, 'w');
-fwrite($fp, ob_get_contents());
-fclose($fp);
-ob_end_flush();

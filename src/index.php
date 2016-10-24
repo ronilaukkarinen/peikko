@@ -1,3 +1,13 @@
+<?php
+$cachefile = 'cached-index.html';
+$cachetime = 1800;
+if (file_exists($cachefile) && time() - $cachetime < filemtime($cachefile)) {
+    include($cachefile);
+    echo "<!-- Amazing hand crafted super cache, generated ".date('H:i', filemtime($cachefile))." -->";
+    exit;
+}
+ob_start();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -214,3 +224,8 @@
 
     </body>
 </html>
+<?php
+$fp = fopen($cachefile, 'w');
+fwrite($fp, ob_get_contents());
+fclose($fp);
+ob_end_flush();
