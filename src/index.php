@@ -1,4 +1,13 @@
 <?php
+function minify_output($buffer){
+    $search = array('/\>[^\S ]+/s','/[^\S ]+\</s','/(\s)+/s');
+    $replace = array('>','<','\\1');
+    if (preg_match("/\<html/i",$buffer) == 1 && preg_match("/\<\/html\>/i",$buffer) == 1) {
+        $buffer = preg_replace($search, $replace, $buffer);
+    }
+    return $buffer;
+}
+
 $cachefile = 'cached-index.html';
 $cachetime = 1800;
 if (file_exists($cachefile) && time() - $cachetime < filemtime($cachefile)) {
@@ -6,7 +15,7 @@ if (file_exists($cachefile) && time() - $cachetime < filemtime($cachefile)) {
     echo "<!-- Amazing hand crafted super cache, generated ".date('H:i', filemtime($cachefile))." -->";
     exit;
 }
-ob_start();
+ob_start('minify_output');
 ?>
 <!DOCTYPE html>
 <html>
