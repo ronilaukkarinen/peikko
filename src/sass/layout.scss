@@ -17,7 +17,7 @@ a:visited {
 }
 
 a:hover {
-  color: #34495e;
+  color: lighten(#34495e, 50%);
 }
 
 .esittely {
