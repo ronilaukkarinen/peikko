@@ -60,108 +60,133 @@
 
 </div>
 
-<!-- Terminal -->
-<div class="console-wrap">
-  <div class="blanket"></div>
-  <span class="icon-console-controls"></span>
-  <div class="console-chrome">
+<!-- New terminal -->
+<div class="browser-window">
 
-  <div class="log">
-  <b><span class="server">peikko</span><span class="mato"> ~ $</span></b> head -5 <a href="/motd.php">/etc/motd</a><br />
-  <?php $motd = nl2br(shell_exec("head -5 /etc/motd"));
-
-$m = '|([\w\d]*)\s?(https?://([\d\w\.-]+\.[\w\.]{2,6})[^\s\]\[\<\>]*/?)|i';
-$r = '$1 <a href="$2">$2</a>';
-
-$motd = preg_replace($m,$r,$motd);
-echo $motd;
-
-?>
-  <div class="cursor"></div>
-  </div>
-
+  <div class="top-bar">
+    <div class="circles">
+      <div class="circle circle-red"></div>
+      <div class="circle circle-yellow"></div>
+      <div class="circle circle-green"></div>
     </div>
   </div>
-</div>
-<!-- /Terminal -->
+  <div class="window-content dark-code">
 
-<!-- Terminal -->
-<div class="console-wrap terminal3">
-<div class="blanket"></div>
-<span class="icon-console-controls"></span>
-<div class="console-chrome">
+    <div class="code">
 
-<iframe src="https://www.adminlabs.com/status/show/id/2d080c4c-7a17-11e4-8471-ce6124683663" frameborder="0"></iframe>
+        <b><span class="server">peikko</span><span class="mato"> ~ $</span></b> head -5 <a href="/motd.php">/etc/motd</a><br />
+        <?php $motd = nl2br(shell_exec("head -5 /etc/motd"));
 
-</div>
-</div>
+      $m = '|([\w\d]*)\s?(https?://([\d\w\.-]+\.[\w\.]{2,6})[^\s\]\[\<\>]*/?)|i';
+      $r = '$1 <a href="$2">$2</a>';
 
-<!-- Terminal -->
-<div class="console-wrap terminal2">
-  <div class="blanket"></div>
-  <span class="icon-console-controls"></span>
-  <div class="console-chrome">
+      $motd = preg_replace($m,$r,$motd);
+      echo $motd;
 
-  <div class="log sysmon">
-  <b><span class="server">peikko</span><span class="mato"> ~ $</span></b> sysmon --realtime<br />
-
-      <div class="row">
-
-        <div class="grid_12 sysmon">
-
-              <ul>
-                <li><span id="connecting"></span>uptime: <span id="uptime">?</span></li>
-                <li><span id="users">?</span> käyttäjää, <span id="processes">?</span> prosessia</li>
-              </ul>
-
-              <div id="cpu" class="r t l b"></div>
-              <div id="mem" class="t r">
-                <div id="virt" class="p b"></div>
-                <div id="swap" class="p"></div>
-              </div>
-
-              <div id="cpu_times" class="r t b">
-
-           <div id="cpu_time_legend" class="p">user
-system
-idle
-nice
-iowait
-irq
-softirq
-steal
-guest</div>
-            <div id="cpu_time_values" class="p"></div>
-            <div id="cpu_time_bars" class="p"></div>
-        </div>
-
-        <div id="io" class="r b">
-
-            <div id="io_legend" class="p">Network
-  Bytes in
-  Bytes out
-
-Disk
-  Reads
-  Writes</div>
-            <div id="io_values" class="p"></div>
-
-                </div>
-
-
-              </div><!-- /grid -->
-
-      </div><!-- /row -->
-
-<div class="cursor"></div>
-
-  </div>
-
+      ?>
+        <div class="cursor"></div>
 
     </div>
   </div>
 
-<!-- /Terminal -->
+</div>
+
+
+<!-- New terminal -->
+<div class="browser-window">
+
+  <div class="top-bar">
+    <div class="circles">
+      <div class="circle circle-red"></div>
+      <div class="circle circle-yellow"></div>
+      <div class="circle circle-green"></div>
+    </div>
+  </div>
+  <div class="window-content dark-code">
+
+    <div class="code adminlabs">
+
+      <iframe src="https://www.adminlabs.com/status/show/id/2d080c4c-7a17-11e4-8471-ce6124683663" frameborder="0"></iframe>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- New terminal -->
+<div class="browser-window">
+
+  <div class="top-bar">
+    <div class="circles">
+      <div class="circle circle-red"></div>
+      <div class="circle circle-yellow"></div>
+      <div class="circle circle-green"></div>
+    </div>
+  </div>
+  <div class="window-content dark-code">
+
+    <div class="code sysmon">
+
+      <b><span class="server">peikko</span><span class="mato"> ~ $</span></b> sysmon --realtime<br />
+
+          <div class="row">
+
+            <div class="grid_12 sysmon">
+
+                  <ul>
+                    <li><span id="connecting"></span>uptime: <span id="uptime">?</span></li>
+                    <li><span id="users">?</span> käyttäjää, <span id="processes">?</span> prosessia</li>
+                  </ul>
+
+                  <div id="cpu" class="r t l b"></div>
+                  <div id="mem" class="t r">
+                    <div id="virt" class="p b"></div>
+                    <div id="swap" class="p"></div>
+                  </div>
+
+                  <div id="cpu_times" class="r t b">
+
+               <div id="cpu_time_legend" class="p">user
+      system
+      idle
+      nice
+      iowait
+      irq
+      softirq
+      steal
+      guest</div>
+                <div id="cpu_time_values" class="p"></div>
+                <div id="cpu_time_bars" class="p"></div>
+            </div>
+
+            <div id="io" class="r b">
+
+                <div id="io_legend" class="p">Network
+      Bytes in
+      Bytes out
+
+      Disk
+      Reads
+      Writes</div>
+                <div id="io_values" class="p"></div>
+
+                    </div>
+
+
+                  </div><!-- /grid -->
+
+          </div><!-- /row -->
+
+      <div class="cursor"></div>
+
+    </div>
+  </div>
+
+</div>
+
+
 
 
         <div class="services">

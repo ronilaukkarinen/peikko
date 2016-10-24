@@ -286,17 +286,17 @@ blockquote:before {
 }
 
 .item {
-  padding: 20px 0 10px 20px;
-  font-size: 1.6em;
+  padding: 30px 0 10px 20px;
+  font-size: 1.2em;
   margin: 0;
   font-weight: 300;
   white-space: nowrap;
 }
 
 .item2 {
-  white-space: nowrap;  
+  white-space: nowrap;
   margin: 0;
-  font-size: 1.2em;
+  font-size: .8em;
   padding: 0 0 0 20px;
   color: #444;
   font-weight: 300;
@@ -617,8 +617,8 @@ li {
     width: 100%;
   }
 }
-// Grid ends
 
+// Grid ends
 @media (max-width: 768px) {
   .services {
     width: 100%;
@@ -659,5 +659,89 @@ li {
     float: none;
     margin: 20px;
     display: block;
+  }
+}
+
+// New terminal:
+.browser-window {
+  display: block;
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .top-bar {
+    height: 30px;
+    border-radius: 4px 4px 0 0;
+    border-top: thin solid #eaeae9;
+    border-bottom: thin solid #dfdfde;
+    background: #ebebeb;
+
+    .circles {
+      margin: 1px 10px;
+
+      .circle {
+        height: 12px;
+        width: 12px;
+        display: inline-block;
+        border-radius: 50%;
+        background-color: #fff;
+
+        &.circle-red {
+          background-color: #e74c3c;
+        }
+
+        &.circle-yellow {
+          background-color: #f1c40f;
+        }
+
+        &.circle-green {
+          background-color: #27ae60;
+        }
+      }
+    }
+  }
+
+  .window-content {
+    overflow: hidden;
+    margin: 0;
+    width: 100%;
+    min-height: 90%;
+    display: inline-block;
+    border-radius: 0 0 4px 4px;
+
+    .code {
+      background-color: #363636;
+      border-radius: 0;
+      padding: 1em;
+      box-shadow: 0 1px 1px rgba(#000, .125);
+      margin: 0;
+      color: #f8f8f2;
+      text-shadow: 0 1px rgba(#000, .3);
+      font-family: Consolas, Monaco, 'Andale Mono', monospace;
+      direction: ltr;
+      text-align: left;
+      line-height: 1.5;
+
+      &.adminlabs {
+        background: none;
+        margin: 0;
+        padding: 0;
+        border-left: 1px solid #dfdfde;
+        border-right: 1px solid #dfdfde;
+        border-bottom: 1px solid #dfdfde;
+      }
+    }
   }
 }
