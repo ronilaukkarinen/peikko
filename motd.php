@@ -2,6 +2,7 @@
 <head>
 <title>MOTD: peikko</title>
 <style>
+/* Crafted with nano, yay! */
 body {
 background: #272a32;
 color: #bbb;
@@ -17,10 +18,14 @@ font-size: 80%;
 strong {
 color: #fff;
 }
+.motd {
+width: 100%;
+max-width: 620px;
+}
 </style>
 </head>
 <body>
-<div class="motd" style="width: 40%">
+<div class="motd">
 <?php
 $output = shell_exec('cat /etc/motd');
 $output = nl2br($output);
