@@ -38,7 +38,7 @@
 <div class="tapahtumat">
 
   <div id="np" class="event">
-    <?php //include('src/lastfm.php'); ?>
+    <?php include('src/lastfm.php'); ?>
   </div>
 
   <div id="trakt" class="event">

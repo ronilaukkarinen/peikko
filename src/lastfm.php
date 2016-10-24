@@ -1,24 +1,31 @@
-<!-- <div class="lastFMBody recenttracks"><ul><li class="itemRow odd"><div class="albumwrap"><a href="https://www.last.fm/user/rolle-/" title="Le Perv on viimeksi kuunneltu serverillä"><img src="https://lastfm-img2.akamaized.net/i/u/300x300/ec72df47dc39cf8b2169f3a95c3e19cb.png" alt="Le Perv" class="album"></a></div><h2 class="item"><a href="https://www.last.fm/music/Carpenter+Brut/_/Le+Perv" title="Kuuntele Le Perv Last.FM:ssä">Le Perv</a></h2><h3 class="item2">Carpenter Brut</h3><a class="nplogo" href="https://dilerium.se/musiccabinet/"><img src="images/subsonicnp.png" alt="Subsonic"></a></li><li class="itemRow even"><div class="albumwrap"><a href="https://www.last.fm/user/rolle-/" title="Roller Mobster on viimeksi kuunneltu serverillä"><img src="https://lastfm-img2.akamaized.net/i/u/300x300/d3fced7e1aaa561fe1e92e43559ef917.png" alt="Roller Mobster" class="album"></a></div><h2 class="item"><a href="https://www.last.fm/music/Carpenter+Brut/_/Roller+Mobster" title="Kuuntele Roller Mobster Last.FM:ssä">Roller Mobster</a></h2><h3 class="item2">Carpenter Brut</h3><a class="nplogo" href="https://dilerium.se/musiccabinet/"><img src="images/subsonicnp.png" alt="Subsonic"></a></li></ul></div> -->
-
+<div class="lastFMBody recenttracks">
+  <ul>
 <?php
-ini_set('display_errors', 0);
-error_reporting(0);
 $lastfmUsername = "rolle-";
 if (is_dir('/Users/rolle')) {
-$lastfmCache = '/Users/rolle/Projects/rollemaa/lastfm.recent.cache';
+$lastfmCache = '/Users/rolle/Projects/peikko/lastfm.recent.cache';
 } else {
 $lastfmCache = "lastfm.recent.cache";
 }
 $secondsBeforeUpdate = 180; // be nice to their link
 $numberOfSongs = 1; // 10 is max
 $socketTimeout = 3; // seconds to wait for response from audioscrobbler
+$apikey = getenv('LASTFM_APIKEY');
 $emptyCache = '
-<a href="#" class="artist-image" title="Virhe" style="background-image:url(https://www.rollemaa.org/content/themes/newera/images/default-band.jpg);"><img class="artist-portrait" src="https://www.rollemaa.org/content/themes/newera/images/default-band.jpg" alt="Virhe" /></a>
-<div class="song-info">
-    <h3><a href="https://www.last.fm/user/rolle-/">Last.fm API-virhe</a></h3>
-          <h4>Yritä myöhemmin uudelleen.</h4>
-    </div>
-</div>
+<li class="itemRow odd">
+  <div class="albumwrap">
+    <a href="#" title="Ei kuunneltuja biisejä">
+      <img src="images/default-band.jpg" alt="Default band" class="album" />
+    </a>
+  </div>
+  <h2 class="item">
+    <a href="http://www.last.fm/user/rolle-/" title="Katso profiili">Ei kuunneltuja biisejä</a>
+  </h2>
+  <h3 class="item2">Last.fm:ssä tai koodissa jotain häikkää juuri nyt</h3>
+  <a class="nplogo" href="http://www.last.fm/user/rolle-/">
+    <img src="images/subsonicnp.png" alt="Subsonic">
+  </a>
+</li>
 ';
 
 // Grab the stuff
@@ -31,7 +38,7 @@ if(time() - $lastModified > $secondsBeforeUpdate) {
   @ini_set("default_socket_timeout", $socketTimeout);
 
   //$recentlyPlayedSongs = @file_get_contents("https://ws.audioscrobbler.com/1.0/user/$lastfmUsername/recenttracks.txt");
-  $getrecentlyplayed = simplexml_load_file('https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=rolle-&api_key=8f3ba6b03aa0cb708387e92434e8428b');
+  $getrecentlyplayed = simplexml_load_file("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=rolle-&api_key=$apikey");
   $row = '';
   foreach($getrecentlyplayed->recenttracks->track as $recenttrack) {
     $row .= "1234567890,".$recenttrack->artist." - ".$recenttrack->name."\n";
@@ -57,59 +64,66 @@ else {
 
   $track = explode("\n", $recentlyPlayedSongs);
 
-  for ($i = 0; $i < $numberOfSongs; $i++) {
+  for ($i = 0; $i < $numberOfSongs; $i++) { ?>
 
-    $trackArray = explode(",", $track[$i]);
+    <li class="itemRow odd">
+
+    <?php $trackArray = explode(",", $track[$i]);
     $entry = explode(" - ", $trackArray[1]);
 
-    $artistxml = simplexml_load_file('https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist='.urlencode($entry[0]).'&api_key=8f3ba6b03aa0cb708387e92434e8428b&limit=1');
+    $trackxml = simplexml_load_file("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=rolle-&api_key=$apikey");
 
-    foreach($artistxml->artist->image as $img) {
-      if($img['size'] == "mega") {
+    $artistxml = simplexml_load_file('https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' . urlencode( $entry[0] ) . '&api_key=' . $apikey . '&limit=1');
 
-        if( $img == "" ) {
-          echo '<a href="https://www.rollemaa.org/content/themes/newera/images/default-band.jpg" class="fancy artist-image" title="'.htmlspecialchars($entry[0]).' - '.htmlspecialchars($entry[1]).'" style="background-image:url(https://www.rollemaa.org/content/themes/newera/images/default-band.jpg);"><img class="artist-portrait" src="https://www.rollemaa.org/content/themes/newera/images/default-band.jpg" alt="'.htmlspecialchars($entry[0]).'" /></a>';
-        } else {
+    // var_dump($trackxml->recenttracks->track);
 
-          $artist_image_filename = basename($img);
+    foreach($trackxml->recenttracks->track->image as $img) { ?>
 
-          if(getenv('WP_ENV') == "development" || file_exists( dirname( __FILE__ ) . '/.dev') ) {
-            $paikallinen_artistikuva = '/var/www/rollemaa/artist-image-db/' .$artist_image_filename;
-          } else {
-            $paikallinen_artistikuva = '/var/www/rollemaa.org/public_html/artist-image-db/' .$artist_image_filename;
-          }
+      <?php if ( $img['size'] == 'large' ) {
 
-          copy($img, $paikallinen_artistikuva);
+        if( $img == "" ) { ?>
 
-          echo '<a href="'.get_home_url().'/artist-image-db/'.$artist_image_filename.'" class="fancy artist-image" title="'.htmlspecialchars($entry[0]).' - '.htmlspecialchars($entry[1]).'" style="background-image:url('.get_home_url().'/artist-image-db/'.$artist_image_filename.');"><img class="artist-portrait" src="'.get_home_url().'/artist-image-db/'.$artist_image_filename.'" alt="'.htmlspecialchars($entry[0]).'" /></a>';
-        }
+          <div class="albumwrap">
+            <a href="https://www.last.fm/music/<?php echo htmlspecialchars($entry[0]); ?>" title="Viimeksi kuunneltu: <?php echo htmlspecialchars($entry[1]); ?>">
+              <img src="images/default-band.jpg" alt="<?php echo htmlspecialchars($entry[0]); ?>" class="album" />
+            </a>
+          </div>
 
+        <?php } else {
+
+          $artist_image_filename = basename( $img );
+
+          if ( getenv('ENV') === 'development' ) :
+            $paikallinen_artistikuva = '/var/www/peikko/images/' . $artist_image_filename;
+          else :
+            $paikallinen_artistikuva = '/var/www/peikko/html/images/artist-image-db/' . $artist_image_filename;
+          endif;
+
+          copy( $img, $paikallinen_artistikuva ); ?>
+
+          <div class="albumwrap">
+            <a href="https://www.last.fm/music/<?php echo htmlspecialchars($entry[0]); ?>" title="Viimeksi kuunneltu: <?php echo htmlspecialchars($entry[1]); ?>">
+              <img src="images/<?php echo $artist_image_filename; ?>" alt="<?php echo htmlspecialchars($entry[0]); ?>" class="album" />
+            </a>
+          </div>
+
+        <?php }
       }
     }
+  }
+  ?>
 
-    echo '
-    <div class="song-info">
-    <h3><a href="https://www.last.fm/music/'.htmlspecialchars($entry[0]).'" class="fancy">'.htmlspecialchars($entry[0]).'</a></h3>
-          <h4>'.htmlspecialchars($entry[1]).'</h4>';
-     echo '
-    </div>
-    </div>
-    ';
+  <h2 class="item">
+    <a href="https://www.last.fm/music/<?php echo htmlspecialchars($entry[0]); ?>" title="Kuunneltu viimeksi: <?php echo htmlspecialchars($entry[0]); ?> - <?php echo htmlspecialchars($entry[1]); ?> "><?php echo htmlspecialchars($entry[0]); ?></a>
+  </h2>
+  <h3 class="item2"><?php echo htmlspecialchars($entry[1]); ?></h3>
+  <a class="nplogo" href="http://www.last.fm/user/rolle-/">
+    <img src="images/subsonicnp.png" alt="Subsonic">
+  </a>
 
+</li>
+<?php
 }
-}
-
-// Debug:
-// error_reporting(-1);
-// ini_set('error_reporting', E_ALL);
-// $test = simplexml_load_file('https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=rolle-&api_key=8f3ba6b03aa0cb708387e92434e8428b');
-// var_dump($test->recenttracks->track->name);
-
-// Tests:
-// $getrecentlyplayed = simplexml_load_file('https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=rolle-&api_key=8f3ba6b03aa0cb708387e92434e8428b');
-// $row = '';
-// foreach($getrecentlyplayed->recenttracks->track as $recenttrack) {
-//   $row .= '1234567890,'.$recenttrack->artist.' - '.$recenttrack->name.'<br />';
-// }
-// file_put_contents($lastfmCache, $row);
 ?>
+</ul>
+</div>
