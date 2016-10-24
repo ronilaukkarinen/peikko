@@ -40,7 +40,7 @@ ob_start('minify_output');
 
         <div class="esittely">
           <h1 class="center"><span><?php echo gethostbyname('www.peikko.us'); ?></span>, tuttavallisemmin <b>peikko</b>.</h1>
-          <h4 class="center"><a href="https://roni.laukkarinen.info">Rollen</a> vaatekomerossa huriseva <span class="version"><?php
+          <h4 class="center"><a href="https://laukkarinen.info">Rollen</a> vaatekomerossa huriseva <span class="version"><?php
               require_once('vendor/autoload.php');
               $dotenv = new Dotenv\Dotenv('./');
               $dotenv->load();
