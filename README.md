@@ -1,6 +1,6 @@
 # peikko
 
-Peikko is a home server running inside of Roni "rolle" Laukkarinen's wardrobe. Peikko.us is a website front end of that home server. You can see the page live by navigating to [www.peikko.us](http://peikko.us).
+Peikko is a home server running inside of Roni "rolle" Laukkarinen's wardrobe. Peikko.us is a website front end of that home server. You can see the page live by navigating to [www.peikko.us](https://peikko.us).
 
 No need for documentation, since this is just a backup and meant for me only.
 
