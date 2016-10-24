@@ -2,24 +2,37 @@
   "name": "peikko",
   "version": "1.0.0",
   "description": "peikko powered modern-html5-boilerplate",
-  "author": "Roni Laukkarinen",
   "devDependencies": {
-    "exec": "0.2.1",    
     "browser-sync": "^2.17.5",
+    "exec": "0.2.1",
     "gulp": "^3.9.1",
-    "gulp-changed": "^1.3.2",
-    "gulp-sass": "^2.3.2",
-    "gulp-util": "^3.0.7",
-    "gulp-minify-css": "1.2.4",
     "gulp-autoprefixer": "3.1.1",
-    "gulp-uglify": "2.0.0",
+    "gulp-cache": "0.4.5",
+    "gulp-changed": "^1.3.2",
     "gulp-concat": "2.6.0",
     "gulp-header": "1.8.8",
-    "gulp-minify-html": "1.0.6",
-    "gulp-copy": "0.0.2"
+    "gulp-htmlmin": "3.0.0",
+    "gulp-imagemin": "^3.0.3",
+    "gulp-minify-css": "1.2.4",
+    "gulp-notify": "^2.2.0",
+    "gulp-pixrem": "^1.0.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^2.2.0",
+    "gulp-uglify": "2.0.0",
+    "gulp-util": "^3.0.7",
+    "require-dir": "^0.3.1",
+    "run-sequence": "1.2.2"
   },
   "dependencies": {
     "backbone": "~1.3.3",
-    "jquery": "~3.1.1"
+    "font-awesome": "^4.6.3",
+    "html5shiv": "^3.7.3",
+    "jeet": "^6.1.5",
+    "jquery": "~3.1.1",
+    "normalize.css": "^5.0.0",
+    "typographic": "^2.9",
+    "sass-web-fonts": "^2.0.2",
+    "matchmedia": "^0.1.2",
+    "sass-rem": "1.2"
   }
 }

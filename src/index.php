@@ -23,7 +23,7 @@
           <h1 class="center"><span><?php echo gethostbyname('www.peikko.us'); ?></span>, tuttavallisemmin <b>peikko</b>.</h1>
           <h4 class="center"><a href="https://roni.laukkarinen.info">Rollen</a> vaatekomerossa huriseva <span class="version"><?php
               require_once('vendor/autoload.php');
-              $dotenv = new Dotenv\Dotenv('../');
+              $dotenv = new Dotenv\Dotenv();
               $dotenv->load();
               ini_set('display_errors', 0);
               $release = shell_exec('cat /etc/redhat-release |head -1');

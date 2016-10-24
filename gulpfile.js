@@ -1,4 +1,4 @@
-/* 
+/*
 
 REQUIRED STUFF
 ==============
@@ -7,27 +7,47 @@ REQUIRED STUFF
 var changed     = require('gulp-changed');
 var gulp        = require('gulp');
 var sass        = require('gulp-sass');
-var browserSync = require('browser-sync');
-var reload      = browserSync.reload;
+var sourcemaps  = require('gulp-sourcemaps');
+var browserSync = require('browser-sync').create();
+var notify      = require('gulp-notify');
 var prefix      = require('gulp-autoprefixer');
 var minifycss   = require('gulp-minify-css');
 var uglify      = require('gulp-uglify');
+var cache       = require('gulp-cache');
 var concat      = require('gulp-concat');
 var util        = require('gulp-util');
 var header      = require('gulp-header');
-var minifyhtml  = require('gulp-minify-html');
+var pixrem      = require('gulp-pixrem');
+var minifyhtml  = require('gulp-htmlmin');
+var runSequence = require('run-sequence');
 var exec        = require('child_process').exec;
 
 
-/* 
+/*
+
+ERROR HANDLING
+==============
+*/
+
+var handleError = function(task) {
+  return function(err) {
+
+      notify.onError({
+        message: task + ' failed, check the logs..',
+        sound: true
+      })(err);
+
+    util.log(util.colors.bgRed(task + ' error:'), util.colors.red(err));
+  };
+};
+
+/*
 
 FILE PATHS
 ==========
 */
 
 var projectName = 'peikko'
-var imgSrc = 'src/images/*.{png,jpg,jpeg,gif}';
-var imgDest = 'images';
 var sassSrc = 'src/sass/**/*.{sass,scss}';
 var sassFile = 'src/sass/layout.scss';
 var cssDest = 'css';
@@ -37,13 +57,13 @@ var markupSrc = 'src/*.php';
 var markupDest = './';
 
 
-/* 
+/*
 
 BROWSERSYNC
 ===========
 */
 
-gulp.task('browsersync', function() {
+gulp.task('browserSync', function() {
 
   var files = [
     cssDest + '/**/*.{css}',
@@ -60,33 +80,40 @@ gulp.task('browsersync', function() {
 });
 
 
-/* 
+/*
 
 SASS
 ====
 */
 
-gulp.task('sass', function() {
+gulp.task('styles', function() {
   gulp.src(sassFile)
 
-    .pipe(sass({
-        compass: false,
-        bundleExec: true,
-        sourcemap: false,
-        style: 'compressed',
-        debugInfo: true,
-        lineNumbers: true,
-        errLogToConsole: true
-      })) 
+  .pipe(sass({
+    compass: false,
+    bundleExec: true,
+    sourcemap: false,
+    style: 'compressed',
+    debugInfo: true,
+    lineNumbers: true,
+    errLogToConsole: true,
+    includePaths: [
+      'node_modules/',
+      // 'bower_components/',
+      // require('node-bourbon').includePaths
+    ],
+  }))
 
+  .on('error', handleError('styles'))
   .pipe(prefix('last 3 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
   .pipe(minifycss({keepBreaks:false,keepSpecialComments:0,}))
+  .pipe(pixrem())
   .pipe(gulp.dest(cssDest))
+  .pipe(browserSync.stream());
 
   });
 
-
-/* 
+/*
 
 SCRIPTS
 =======
@@ -100,11 +127,9 @@ gulp.task('js', function() {
 
       gulp.src(
         [
-          jsSrc + '/jquery.js',
-          jsSrc + '/pace.js',
-          jsSrc + '/jquery.zlastfm.js',
-          jsSrc + '/ws.js',
-          jsSrc + '/sysmon.js',
+          'node_modules/jquery/dist/jquery.js',
+          jsSrc + '/jquery-lang.js',
+          jsSrc + '/js.cookie.js',
           jsSrc + '/scripts.js',
         ])
         .pipe(concat('all.js'))
@@ -114,28 +139,23 @@ gulp.task('js', function() {
 });
 
 
-/* 
+/*
 
 MARKUP
 =======
 */
 
 gulp.task('minify-html', function() {
-
   gulp.src(markupSrc)
     .pipe(minifyhtml({
-      empty: true,
-      cdata: false,
-      comments: true,
-      conditionals: false,
-      spare: false,
-      quotes: true,
-      loose: false
+      collapseWhitespace: true,
+      removeComments: false,
+      removeScriptTypeAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      minifyJS: true,
+      minifyCSS: true
     }))
     .pipe(gulp.dest(markupDest))
-    exec("cp index.php /Volumes/Root/var/www/html/");
-    exec("cp -R css /Volumes/Root/var/www/html/");
-
 });
 
 /*
@@ -143,14 +163,17 @@ gulp.task('minify-html', function() {
 WATCH
 =====
 
+Notes:
+   - browserSync automatically reloads any files
+     that change within the directory it's serving from
 */
 
 // Run the JS task followed by a reload
 gulp.task('js-watch', ['js'], browserSync.reload);
-gulp.task('watch', ['browsersync'], function() {
 
-  gulp.watch(sassSrc, ['sass']);
+gulp.task('watch', ['browserSync'], function() {
+
+  gulp.watch(sassSrc, ['styles']);
   gulp.watch(markupSrc, ['minify-html']);
-  gulp.watch(jsSrc, ['js']);
-
+  gulp.watch(jsSrc + '/**/*.js', ['js-watch']);
 });
