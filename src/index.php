@@ -60,6 +60,30 @@
 
 </div>
 
+
+
+<!-- New terminal -->
+<div class="browser-window">
+
+  <div class="top-bar">
+    <div class="circles">
+      <div class="circle circle-red"></div>
+      <div class="circle circle-yellow"></div>
+      <div class="circle circle-green"></div>
+    </div>
+  </div>
+  <div class="window-content dark-code">
+
+    <div class="code adminlabs">
+
+      <iframe src="https://www.adminlabs.com/status/show/id/2d080c4c-7a17-11e4-8471-ce6124683663" frameborder="0"></iframe>
+
+    </div>
+  </div>
+
+</div>
+
+
 <!-- New terminal -->
 <div class="browser-window">
 
@@ -91,27 +115,6 @@
 
 </div>
 
-
-<!-- New terminal -->
-<div class="browser-window">
-
-  <div class="top-bar">
-    <div class="circles">
-      <div class="circle circle-red"></div>
-      <div class="circle circle-yellow"></div>
-      <div class="circle circle-green"></div>
-    </div>
-  </div>
-  <div class="window-content dark-code">
-
-    <div class="code adminlabs">
-
-      <iframe src="https://www.adminlabs.com/status/show/id/2d080c4c-7a17-11e4-8471-ce6124683663" frameborder="0"></iframe>
-
-    </div>
-  </div>
-
-</div>
 
 
 
