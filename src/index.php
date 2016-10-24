@@ -23,7 +23,7 @@
           <h1 class="center"><span><?php echo gethostbyname('www.peikko.us'); ?></span>, tuttavallisemmin <b>peikko</b>.</h1>
           <h4 class="center"><a href="https://roni.laukkarinen.info">Rollen</a> vaatekomerossa huriseva <span class="version"><?php
               require_once('vendor/autoload.php');
-              $dotenv = new Dotenv\Dotenv();
+              $dotenv = new Dotenv\Dotenv('./');
               $dotenv->load();
               ini_set('display_errors', 0);
               $release = shell_exec('cat /etc/redhat-release |head -1');
@@ -37,38 +37,12 @@
 
 <div class="tapahtumat">
 
-  <div id="np" class="event"></div>
+  <div id="np" class="event">
+    <?php //include('src/lastfm.php'); ?>
+  </div>
 
-
-<div id="trakt" class="event">
-
-                <?php
-                    $url = "https://trakt.tv/users/rolle/history.atom?slurm=".getenv('TRAKT_SLURM')."";
-                    $rss = simplexml_load_file($url);
-                    $list = $rss->xpath("//@url");
-
-                    $preparedUrls = array();
-                    foreach($list as $item) {
-                          $item = parse_url($item);
-                          $preparedUrls[] = $item['scheme'] . '://' .  $item['host'] . '' .  $item['path'] . '';
-                    }
-                    $image = $preparedUrls[1];
-                ?>
-
-    <div class="trakt">
-      <div class="traktposter">
-        <a href="https://trakt.tv/user/rolle" title="<?php echo $rss->entry->title; ?>">
-
-        <img src="<?php echo $image; ?>" alt="<?php echo $rss->entry->title; ?>" /></a>
-
-      </div>
-
-      <h2 class="item"><a href="<?php echo $rss->entry->children($namespaces['link'])->attributes()->href; ?>" title="<?php echo $rss->entry->title; ?> viimeksi katsottu serverillä"><?php echo $rss->entry->title; ?></a></h2>
-
-      <h3 class="item2"><?php echo $rss->entry->title; ?></h3>
-
-      <a class="nplogo" href="https://www.plexapp.com"><img src="images/plexnp.png" alt="Plex" /></a></div>
-
+  <div id="trakt" class="event">
+    <?php include('src/trakt.php'); ?>
   </div>
 
   <div id="irc" class="event"><blockquote><?php

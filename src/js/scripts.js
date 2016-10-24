@@ -18,7 +18,7 @@ $(function(){
 //       url: 'https://api.trakt.tv/activity/user.json/addddddb526608d7639d3b07e176f2ea/rolle/?callback=?',
 //       dataType: "json",
 
-//       success: function(data){ 
+//       success: function(data){
 
 //       	//console.log(data.activity[0].episode.title);
 
@@ -26,7 +26,7 @@ $(function(){
 
 // 			//console.log(data);
 
-// 			if (typeof data.activity[0].movie == "undefined") { 
+// 			if (typeof data.activity[0].movie == "undefined") {
 
 // 			var div_data = '<div class="trakt"><div class="traktposter"><a href="https://trakt.tv/user/rolle" title="'+data.activity[0].show.title+':n jakso '+data.activity[0].episode.title+' on viimeksi katsottu serverillä"><img src="'+data.activity[0].show.images.poster+'" alt="'+data.activity[0].show.title+'" /></a></div><h2 class="item"><a href='+data.activity[0].show.url+' title="'+data.activity[0].episode.title+' on viimeksi katsottu serverillä">'+data.activity[0].show.title+'</a></h2><h3 class="item2">'+data.activity[0].episode.title+'</h3><a class="nplogo" href="https://www.plexapp.com"><img src="img/plexnp.png" alt="Plex" /></a></div>';
 
@@ -41,7 +41,7 @@ $(function(){
 
 // 			$(div_data).appendTo("#trakt");
 
-		
+
 
 
 // 	}

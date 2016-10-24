@@ -146,16 +146,16 @@ MARKUP
 */
 
 gulp.task('minify-html', function() {
-  gulp.src(markupSrc)
-    .pipe(minifyhtml({
-      collapseWhitespace: true,
-      removeComments: false,
-      removeScriptTypeAttributes: true,
-      removeStyleLinkTypeAttributes: true,
-      minifyJS: true,
-      minifyCSS: true
-    }))
-    .pipe(gulp.dest(markupDest))
+  gulp.src('src/index.php')
+    // .pipe(minifyhtml({
+    //   collapseWhitespace: false,
+    //   removeComments: false,
+    //   removeScriptTypeAttributes: true,
+    //   removeStyleLinkTypeAttributes: true,
+    //   minifyJS: true,
+    //   minifyCSS: true
+    // }))
+    .pipe(gulp.dest('./'))
 });
 
 /*
