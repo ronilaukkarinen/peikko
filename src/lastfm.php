@@ -1,6 +1,4 @@
-<div class="lastFMBody recenttracks">
-  <ul>
-<?php
+<div class="lastFMBody recenttracks"><ul><?php
 $lastfmUsername = "rolle-";
 if (is_dir('/Users/rolle')) {
 $lastfmCache = '/Users/rolle/Projects/peikko/lastfm.recent.cache';
@@ -64,11 +62,7 @@ else {
 
   $track = explode("\n", $recentlyPlayedSongs);
 
-  for ($i = 0; $i < $numberOfSongs; $i++) { ?>
-
-    <li class="itemRow odd">
-
-    <?php $trackArray = explode(",", $track[$i]);
+  for ($i = 0; $i < $numberOfSongs; $i++) { ?><li class="itemRow odd"><?php $trackArray = explode(",", $track[$i]);
     $entry = explode(" - ", $trackArray[1]);
 
     $trackxml = simplexml_load_file("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=rolle-&api_key=$apikey");
@@ -77,19 +71,9 @@ else {
 
     // var_dump($trackxml->recenttracks->track);
 
-    foreach($trackxml->recenttracks->track->image as $img) { ?>
+    foreach($trackxml->recenttracks->track->image as $img) { ?><?php if ( $img['size'] == 'large' ) {
 
-      <?php if ( $img['size'] == 'large' ) {
-
-        if( $img == "" ) { ?>
-
-          <div class="albumwrap">
-            <a href="https://www.last.fm/music/<?php echo htmlspecialchars($entry[0]); ?>" title="Viimeksi kuunneltu: <?php echo htmlspecialchars($entry[1]); ?>">
-              <img src="images/default-band.jpg" alt="<?php echo htmlspecialchars($entry[0]); ?>" class="album" />
-            </a>
-          </div>
-
-        <?php } else {
+        if( $img == "" ) { ?><div class="albumwrap"><a href="https://www.last.fm/music/<?php echo htmlspecialchars($entry[0]); ?>"title="Viimeksi kuunneltu:<?php echo htmlspecialchars($entry[1]); ?>"><img alt="<?php echo htmlspecialchars($entry[0]); ?>"src="images/default-band.jpg"class="album"></a></div><?php } else {
 
           $artist_image_filename = basename( $img );
 
@@ -99,31 +83,10 @@ else {
             $paikallinen_artistikuva = '/var/www/peikko/html/images/artist-image-db/' . $artist_image_filename;
           endif;
 
-          copy( $img, $paikallinen_artistikuva ); ?>
-
-          <div class="albumwrap">
-            <a href="https://www.last.fm/music/<?php echo htmlspecialchars($entry[0]); ?>" title="Viimeksi kuunneltu: <?php echo htmlspecialchars($entry[1]); ?>">
-              <img src="images/<?php echo $artist_image_filename; ?>" alt="<?php echo htmlspecialchars($entry[0]); ?>" class="album" />
-            </a>
-          </div>
-
-        <?php }
+          copy( $img, $paikallinen_artistikuva ); ?><div class="albumwrap"><a href="https://www.last.fm/music/<?php echo htmlspecialchars($entry[0]); ?>"title="Viimeksi kuunneltu:<?php echo htmlspecialchars($entry[1]); ?>"><img alt="<?php echo htmlspecialchars($entry[0]); ?>"src="images/<?php echo $artist_image_filename; ?>"class="album"></a></div><?php }
       }
     }
   }
-  ?>
-
-  <h2 class="item">
-    <a href="https://www.last.fm/music/<?php echo htmlspecialchars($entry[0]); ?>" title="Kuunneltu viimeksi: <?php echo htmlspecialchars($entry[0]); ?> - <?php echo htmlspecialchars($entry[1]); ?> "><?php echo htmlspecialchars($entry[0]); ?></a>
-  </h2>
-  <h3 class="item2"><?php echo htmlspecialchars($entry[1]); ?></h3>
-  <a class="nplogo" href="http://www.last.fm/user/rolle-/">
-    <img src="images/subsonicnp.png" alt="Subsonic">
-  </a>
-
-</li>
-<?php
+  ?><h2 class="item"><a href="https://www.last.fm/music/<?php echo htmlspecialchars($entry[0]); ?>"title="Kuunneltu viimeksi:<?php echo htmlspecialchars($entry[0]); ?>-<?php echo htmlspecialchars($entry[1]); ?>"><?php echo htmlspecialchars($entry[0]); ?></a></h2><h3 class="item2"><?php echo htmlspecialchars($entry[1]); ?></h3><a href="http://www.last.fm/user/rolle-/"class="nplogo"><img alt="Subsonic"src="images/subsonicnp.png"></a></li><?php
 }
-?>
-</ul>
-</div>
+?></ul></div>

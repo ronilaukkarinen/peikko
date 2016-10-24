@@ -52,7 +52,6 @@ var sassSrc = 'src/sass/**/*.{sass,scss}';
 var sassFile = 'src/sass/layout.scss';
 var cssDest = 'css';
 var jsSrc = 'src/js';
-var jsDest = 'js';
 var markupSrc = 'src/*.php';
 var markupDest = './';
 
@@ -127,15 +126,15 @@ gulp.task('js', function() {
 
       gulp.src(
         [
-          'node_modules/jquery/dist/jquery.js',
-          jsSrc + '/jquery-lang.js',
-          jsSrc + '/js.cookie.js',
+          jsSrc + '/jquery.js',
+          jsSrc + '/ws.js',
+          jsSrc + '/sysmon.js',
           jsSrc + '/scripts.js',
         ])
         .pipe(concat('all.js'))
         .pipe(uglify({preserveComments: false, compress: true, mangle: true}).on('error',function(e){console.log('\x07',e.message);return this.end();}))
         .pipe(header(banner, {pkg: pkg, currentDate: currentDate}))
-        .pipe(gulp.dest(jsDest));
+        .pipe(gulp.dest('./js/'));
 });
 
 
