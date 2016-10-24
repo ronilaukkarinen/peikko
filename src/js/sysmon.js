@@ -106,7 +106,7 @@ if (isNaN(num)) return '';
         }
 
         function connect() {
-            return $.gracefulWebSocket("wss://peikko.us:1234");
+            return $.gracefulWebSocket("ws://peikko.us:2221");
         }
 
         setInterval(draw_connecting, 1000);

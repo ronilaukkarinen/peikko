@@ -45,15 +45,15 @@
                 keepAlive: false,       // not implemented - should ping server to keep socket open
                 autoReconnect: false,   // not implemented - should try to reconnect silently if socket is closed
                 fallback: true,         // not implemented - always use HTTP fallback if native browser support is missing
-                fallbackSendURL: url.replace('wss:', 'http:').replace('wss:', 'http:'),
+                fallbackSendURL: url.replace('wss:', 'http:').replace('wss:', 'https:'),
                 fallbackSendMethod: 'POST',
-                fallbackPollURL: url.replace('wss:', 'http:').replace('wss:', 'http:'),
+                fallbackPollURL: url.replace('wss:', 'http:').replace('wss:', 'https:'),
                 fallbackPollMethod: 'GET',
                 fallbackOpenDelay: 100, // number of ms to delay simulated open event
                 fallbackPollInterval: 3000, // number of ms between poll requests
                 fallbackPollParams: {}      // optional params to pass with poll requests
             };
-
+            
             // Override defaults with user properties
             var opts = $.extend({}, this.defaults, options);
 
