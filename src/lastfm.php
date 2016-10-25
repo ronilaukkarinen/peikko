@@ -90,7 +90,7 @@ else {
           $artist_image_filename = basename( $img );
 
           if ( getenv('ENV') == 'development' ) :
-            $paikallinen_artistikuva = '/var/www/images/' . $artist_image_filename;
+            $paikallinen_artistikuva = '/var/www/peikko/images/' . $artist_image_filename;
           else :
             $paikallinen_artistikuva = '/var/www/html/images/' . $artist_image_filename;
           endif;
