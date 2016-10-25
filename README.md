@@ -10,4 +10,4 @@ This project actually started years back (I think I first got the server in 2005
 
 ### Background
 
-I'm a Red Hat-guy, so all of my *server* distros have been Red Hat-based. I first had SUSE for a long time in the 2000s, then CentOS in 2013, now Fedora in 2015.
+I'm a Red Hat-guy, so all of my *home server* distros have been Red Hat-based. I first had SUSE for a long time in the 2000s, then CentOS in 2013, now Fedora in 2015.
