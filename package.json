@@ -29,10 +29,10 @@
     "html5shiv": "^3.7.3",
     "jeet": "^6.1.5",
     "jquery": "~3.1.1",
-    "normalize.css": "^5.0.0",
-    "typographic": "^2.9",
-    "sass-web-fonts": "^2.0.2",
     "matchmedia": "^0.1.2",
-    "sass-rem": "1.2"
+    "normalize.css": "^5.0.0",
+    "sass-rem": "1.2",
+    "sass-web-fonts": "^2.0.2",
+    "typographic": "^2.9"
   }
 }

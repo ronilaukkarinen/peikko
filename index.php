@@ -52,7 +52,20 @@ endif;
               $versionongintaaa = explode("(", $versionongintaa[1]);
               $versio = $versionongintaaa[0];
           ?>
-          <span class="opacity"><a href="https://getfedora.org/en/server/" class="fedoramini"><?php echo $versio; ?></a></span></span>-palvelintietokone.</h4>
+          <span class="opacity"><a href="https://getfedora.org/en/server/" class="fedoramini"><?php echo $versio; ?></a></span></span>-harrastepalvelintietokone.</h4>
+
+          <div class="powered-by">
+            <h4>Palvelimen toiminnan mahdollistaa:</h4>
+
+            <div class="cols">
+              <div class="col">
+                <a href="https://www.sonera.fi"><?php echo file_get_contents('svg/sonera.svg'); ?></a>
+              </div>
+              <div class="col">
+                <a href="https://advancedtomato.com/"><?php echo file_get_contents('svg/tomato.svg'); ?></a>
+              </div>
+            </div>
+          </div>
 
         </div>
 

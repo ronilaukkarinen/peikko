@@ -1,5 +1,6 @@
 // Wanahaa paskaa. Note to self: Uudista viimeistään vuonna 2023
 @import url('https://fonts.googleapis.com/css?family=Oxygen:400,300,700');
+@import 'jeet/scss/jeet/index';
 
 body {
   background: #fafbfb;
@@ -743,6 +744,79 @@ li {
         border-right: 1px solid #dfdfde;
         border-bottom: 1px solid #dfdfde;
         height: 185px;
+      }
+    }
+  }
+}
+
+.powered-by {
+  text-align: center;
+
+  h4 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #999;
+    opacity: .8;
+    margin-top: 50px;
+    margin-bottom: 0;
+  }
+
+  .cols {
+    overflow: hidden;
+    margin-top: 20px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+
+    .col {
+      @include col(1/2);
+      position: relative;
+
+      &:nth-child(2) {
+        &:before {
+          content: '+';
+          position: absolute;
+          left: 0;
+          font-size: 33px;
+          top: 10px;
+          color: #999;
+        }
+      }
+
+      svg {
+        height: 60px;
+        width: auto;
+        fill: #999;
+
+        &.tomato {
+          fill: #999;
+          margin-left: -10px;
+
+          path {
+            fill: #999;
+
+            &:hover {
+              fill: #e74c3c;
+            }
+          }
+
+          &:hover {
+            fill: #e74c3c;
+
+            path {
+              fill: #e74c3c;
+            }
+          }
+        }
+
+        &.sonera {
+          fill: #999;
+
+          &:hover {
+            fill: #732d88;
+          }
+        }
       }
     }
   }
