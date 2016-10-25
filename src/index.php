@@ -210,11 +210,8 @@ endif;
 
 </div>
 
-
-
-
         <div class="services">
-
+          <!-- Not updated since forever, can't generate SVG images here... legacy shit. -->
           <img src="images/logo-subsonic.png" alt="Subsonic" title="Subsonic/Musiccabinet" />
           <img src="images/logo-couchpotato.png" alt="Couchpotato" title="Couchpotato" />
           <img src="images/logo-sickbeard.png" alt="Sick-Beard" title="Sick-Beard" />
@@ -225,7 +222,6 @@ endif;
           <img src="images/logo-irssi.png" alt="Irssi" title="irssi" />
           <img src="images/logo-ddwrt.png" alt="dd-wrt" title="dd-wrt" />
           <img src="images/logo-mediagoblin.png" alt="Mediagoblin" title="Mediagoblin" />
-
         </div>
 
 
