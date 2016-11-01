@@ -1,5 +1,9 @@
 <?php
     $url = "https://trakt.tv/users/rolle/history.atom?slurm=".getenv('TRAKT_SLURM')."";
+
+    if(strpos(file_get_contents($url),'<?xml')===false) {
+    } else {
+
     $rss = simplexml_load_file($url);
     $list = $rss->xpath("//@url");
 
@@ -22,15 +26,22 @@
 ?>
 
 <div class="trakt">
-<div class="traktposter">
-<a href="https://trakt.tv/user/rolle" title="<?php echo $rss->entry->title; ?>">
+  <div class="traktposter">
+    <a href="https://trakt.tv/user/rolle" title="<?php echo $rss->entry->title; ?>">
+      <img src="images/<?php echo $trakt_image_filename; ?>" alt="<?php echo $rss->entry->title; ?>" />
+    </a>
+  </div>
 
-<img src="images/<?php echo $trakt_image_filename; ?>" alt="<?php echo $rss->entry->title; ?>" /></a>
+  <h2 class="item"><a href="<?php echo $rss->entry->children($namespaces['link'])->attributes()->href; ?>" title="<?php echo $rss->entry->title; ?> viimeksi katsottu serverillä"><?php echo $rss->entry->title; ?></a></h2>
+
+  <h3 class="item2">
+    <?php echo $rss->entry->title; ?>
+  </h3>
+
+  <a class="nplogo" href="https://www.plexapp.com">
+    <img src="images/plexnp.png" alt="Plex" />
+  </a>
 
 </div>
 
-<h2 class="item"><a href="<?php echo $rss->entry->children($namespaces['link'])->attributes()->href; ?>" title="<?php echo $rss->entry->title; ?> viimeksi katsottu serverillä"><?php echo $rss->entry->title; ?></a></h2>
-
-<h3 class="item2"><?php echo $rss->entry->title; ?></h3>
-
-<a class="nplogo" href="https://www.plexapp.com"><img src="images/plexnp.png" alt="Plex" /></a></div>
+<?php } ?>
