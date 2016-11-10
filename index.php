@@ -110,7 +110,7 @@ endif;
 
     <div class="code adminlabs">
 
-      <iframe src="https://www.adminlabs.com/status/show/id/2d080c4c-7a17-11e4-8471-ce6124683663" frameborder="0"></iframe>
+      <iframe src="https://status.adminlabs.com/status/show/id/2d080c4c-7a17-11e4-8471-ce6124683663/preview/1" frameborder="0" scrolling="no"></iframe>
 
     </div>
   </div>

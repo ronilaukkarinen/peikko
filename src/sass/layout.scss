@@ -744,6 +744,11 @@ li {
         border-right: 1px solid #dfdfde;
         border-bottom: 1px solid #dfdfde;
         height: 185px;
+        overflow: hidden;
+
+        iframe {
+          overflow: hidden;
+        }
       }
     }
   }
