@@ -830,8 +830,16 @@ li {
         &.telia {
           fill: #999;
 
+          .path {
+            fill: #999 !important;
+          }
+
           &:hover {
-            fill: #732d88;
+            fill: #82368c !important;
+
+            .path {
+              fill: #82368c !important;
+            }
           }
         }
       }
