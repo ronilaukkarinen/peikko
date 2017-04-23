@@ -59,7 +59,7 @@ endif;
 
             <div class="cols">
               <div class="col">
-                <a href="https://www.sonera.fi"><?php echo file_get_contents('svg/sonera.svg'); ?></a>
+                <a href="https://www.telia.fi"><?php echo file_get_contents('svg/telia.svg'); ?></a>
               </div>
               <div class="col">
                 <a href="https://advancedtomato.com/"><?php echo file_get_contents('svg/tomato.svg'); ?></a>
