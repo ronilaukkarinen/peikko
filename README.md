@@ -2,7 +2,7 @@
 
 Peikko is a home server running inside of Roni "rolle" Laukkarinen's wardrobe. Peikko.us is a website front end of that home server. You can see the page live by navigating to [peikko.us](http://peikko.us) or [peikko.us](https://peikko.us) (currently sysmon websocket not working with encryption).
 
-![Screenshot](https://dl.dropboxusercontent.com/u/18447700/screenshot_peikkous.png "Screenshot")
+![Screenshot](https://rolle.design/screenshot_peikkous.png "Screenshot")
 
 No need for documentation, since this is just a backup and meant for me only.
 
