@@ -1,0 +1,143 @@
+#!/bin/bash
+# Rolle's dynamic motd
+# Symlink this file to /usr/bin/dynmotd and add it to your ~/.bash_profile
+# Set in /usr/ssh/sshd_config:
+# PrintMotd no
+# PrintLastLog no
+
+# Set env
+PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Set up colors:
+NO_COLOR='\e[0m' # Disable any colors
+# regular colors
+BLACK='\e[0;30m'
+RED='\e[0;31m'
+GREEN='\e[0;32m'
+YELLOW='\e[0;33m'
+BLUE='\e[0;34m'
+MAGENTA='\e[0;35m'
+CYAN='\e[0;36m'
+WHITE='\e[0;37m'
+# Emphasized (bolded) colors
+EBLACK='\e[1;30m'
+ERED='\e[1;31m'
+EGREEN='\e[1;32m'
+EYELLOW='\e[1;33m'
+EBLUE='\e[1;34m'
+EMAGENTA='\e[1;35m'
+ECYAN='\e[1;36m'
+EWHITE='\e[1;37m'
+# Underlined colors
+UBLACK='\e[4;30m'
+URED='\e[4;31m'
+UGREEN='\e[4;32m'
+UYELLOW='\e[4;33m'
+UBLUE='\e[4;34m'
+UMAGENTA='\e[4;35m'
+UCYAN='\e[4;36m'
+UWHITE='\e[4;37m'
+# Background colors
+BBLACK='\e[40m'
+BRED='\e[41m'
+BGREEN='\e[42m'
+BYELLOW='\e[43m'
+BBLUE='\e[44m'
+BMAGENTA='\e[45m'
+BCYAN='\e[46m'
+BWHITE='\e[47m'
+
+FILE_MOTD='/etc/motd'
+
+BIN_DATE='/bin/date'
+BIN_FIGLET='/usr/bin/figlet'
+BIN_HOSTNAME='/bin/hostname'
+BIN_IP='/sbin/ip'
+BIN_GREP='/bin/grep'
+BIN_SED='/bin/sed'
+BIN_UPTIME='/usr/bin/uptime'
+BIN_CAT='/bin/cat'
+BIN_UNAME='/bin/uname'
+BIN_FREE='/usr/bin/free'
+BIN_HEAD='/usr/bin/head'
+BIN_TAIL='/usr/bin/tail'
+BIN_DF='/bin/df'
+BIN_AWK='/bin/awk'
+BIN_BC='/usr/bin/bc'
+BIN_PS='/bin/ps'
+BIN_PUBLICIP='cat /home/rolle/publicip.log'
+BIN_RELEASE='cat /etc/fedora-release'
+
+#echo -e ''
+#/usr/bin/figlet -f /home/rolle/.local/share/fonts/3d.flf " peikko" |lolcat
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+cat /etc/ssh/sshd-banner |lolcat
+
+RELEASE=`cat /etc/redhat-release |head -1 |lolcat`
+#UPTIME=`/usr/bin/better_uptime |lolcat`
+#UPTIME=`cat /home/rolle/uptime.txt |lolcat`
+UPTIME=`uptime -p |lolcat`
+LOADAVG=`cat /proc/loadavg |lolcat`
+echo -e "  $RELEASE \c" |lolcat
+echo -e "  $UPTIME \c" |lolcat
+echo -e "  load average: $LOADAVG" |lolcat
+
+#echo -e "$GREEN Memory$WHITE: `cat /proc/meminfo | grep MemFree | awk {'print int($2/1000)'}` MB / `cat /proc/meminfo | grep MemTotal | awk {'print int($2/1000)'}` MB$NO_COLOR"
+#echo -e "$GREEN Processes$WHITE: `cat /proc/loadavg | cut -d"/" -f2| cut -d" " -f1`$NO_COLOR"
+#echo -e "$GREEN Global IP Address${WHITE}: $(${BIN_PUBLICIP})"
+#echo -e "$GREEN Private IP Address${WHITE}: $(${BIN_IP} addr show enp2s0 2>/dev/null | ${BIN_GREP} 'inet ' | ${BIN_SED} -e 's/.*inet \([^ ]*\)\/.*/\1/')"
+#echo -e "$GREEN CPU Usage${WHITE}: $(echo $(${BIN_PS} -eo pcpu | ${BIN_AWK} 'NR>1' | ${BIN_AWK} '{tot=tot+$1} END {print tot}') / $(${BIN_CAT} /proc/cpuinfo | ${BIN_GREP} -c processor) | ${BIN_BC} )%"
+#echo -e "$GREEN Memory${WHITE}: $(${BIN_FREE} -m | ${BIN_HEAD} -n 2 | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $3'})/$(${BIN_FREE} -m | ${BIN_HEAD} -n 2 | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $2'})MB"
+#echo -e "$GREEN System Disk${WHITE}: $(${BIN_DF} -h / | tail -n 1 | ${BIN_AWK} {'print $3'})/$(${BIN_DF} -h / | ${BIN_TAIL} -n 1 | ${BIN_AWK} {'print $2'})"
+
+#echo -e "
+#  ${EWHITE}For other functions, please run: ${MAGENTA}commands
+#"
+#echo -e ""
+
+#sh /home/rolle/memoryprogress.sh
+#sh /home/rolle/spaceprogress.sh
+#sh /home/rolle/cpuprogress.sh
+#sh /home/rolle/trafficprogress.sh
+
+# Procseses
+
+if pgrep -x "jackett" >/dev/null
+then
+    echo -e "  ${WHITE}Jackett:         ${GREEN}active${WHITE} - https://jackett.peikko.us"
+else
+    echo -e "  ${WHITE}Jackett:         ${RED}stopped"
+fi
+
+if pgrep -fl "Tautulli.py" >/dev/null
+then
+    echo -e "  ${WHITE}Tautulli:        ${GREEN}active${WHITE} - https://tautulli.peikko.us"
+else
+    echo -e "  ${WHITE}Tautulli:        ${RED}stopped"
+fi
+
+if pgrep -fl "SickBeard.py" >/dev/null
+then
+    echo -e "  ${WHITE}SickChill:       ${GREEN}active${WHITE} - https://sickchill.peikko.us"
+else
+    echo -e "  ${WHITE}SickChill:       ${RED}stopped"
+fi
+
+if pgrep -fl "watcher.py" >/dev/null
+then
+    echo -e "  ${WHITE}Watcher:         ${GREEN}active${WHITE} - https://watcher.peikko.us"
+else
+    echo -e "  ${WHITE}Watcher:         ${RED}stopped"
+fi
+
+PLEXACTIVE=`systemctl show -p ActiveState plexmediaserver | sed 's/ActiveState=//g'`
+if [ "$str1" == "$str2" ]; then
+    echo -e "  ${WHITE}plexmediaserver: ${GREEN}$PLEXACTIVE${WHITE} - https://app.plex.tv"
+else
+   echo -e "   ${WHITE}plexmediaserver: ${RED}$PLEXACTIVE${WHITE}"
+fi
+
+echo -e "  ${WHITE}nextcloud:       ${GREEN}$PLEXACTIVE${WHITE} - https://nextcloud.peikko.us"
+
+echo ''
