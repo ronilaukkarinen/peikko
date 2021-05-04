@@ -1,23 +1,7 @@
 <?php
-if ( getenv('ENV') != 'development' ) :
-  function minify_output($buffer) {
-      $search = array('/\>[^\S ]+/s','/[^\S ]+\</s','/(\s)+/s');
-      $replace = array('>','<','\\1');
-      if (preg_match("/\<html/i",$buffer) == 1 && preg_match("/\<\/html\>/i",$buffer) == 1) {
-          $buffer = preg_replace($search, $replace, $buffer);
-      }
-      return $buffer;
-  }
-
-  $cachefile = 'cached-index.html';
-  $cachetime = 1800;
-  if (file_exists($cachefile) && time() - $cachetime < filemtime($cachefile)) {
-      include($cachefile);
-      echo "<!-- Amazing hand crafted super cache, generated ".date('H:i', filemtime($cachefile))." -->";
-      exit;
-  }
-  ob_start('minify_output');
-endif;
+if ( 'peikko.us' !== $_SERVER['HTTP_HOST'] ) {
+  die();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -244,10 +228,3 @@ endif;
 
     </body>
 </html>
-<?php
-if ( getenv('ENV') != 'development' ) :
-  $fp = fopen($cachefile, 'w');
-  fwrite($fp, ob_get_contents());
-  fclose($fp);
-  ob_end_flush();
-endif;
